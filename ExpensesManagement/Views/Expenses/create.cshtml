@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Create new expense";
+}
+
+@model ExpensesManagement.Models.Expense;
+
+<div class="container">
+    <h1>Create new expense</h1>
+
+    <hr class="mb-1" />
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label>Expense name</label>
+            <input type="text" asp-for="ExpenseName" class="form-control" placeholder="What did you bought?" />
+            <span asp-validation-for="ExpenseName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Amount</label>
+            <input type="text" asp-for="Amount" class="form-control" placeholder="How much did it cost?" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Date</label>
+            <input type="text" disabled class="form-control" value="@DateTime.Now.ToShortDateString() " placeholder="What did you bought?" />
+            <input type="hidden" asp-for="Date" value="@DateTime.Now"  />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="AccountId" value="@ViewBag.accountId" />
+        <a asp-action="index" class="mx-1"><button type="button" class="btn btn-secondary">Back</button></a>
+        <button class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

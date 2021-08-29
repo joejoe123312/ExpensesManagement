@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model ExpensesManagement.Models.Balance;
+<div class="container">
+    <div align="center" class="bg-dark text-white font-weight-bold p-5 rounded">
+        <h1>Expense Management System</h1>
+        <h2>
+            Current balance: @Model.Money 
+            @if (Model.Money > 1)
+            {
+                <span>Pesos</span>
+            }
+            else
+            {
+                <span>Peso</span>
+            }
+        </h2>
+    </div>
+    <hr />
+    <div class="row mx-1 rounded bg-dark">
+        <div class="col-md-6" id="depositBtn">
+            <div class="bg-success p-5 m-4 rounded text-white font-weight-bolder" align="center" style="font-size: 5vh;">
+                <span id="depositText">DEPOSIT</span>
+                <div id="depositPart" style="display:none">
+                    <form asp-action="Deposit" method="post" id="depositForm">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="number" asp-for="Money" placeholder="How much will you deposit?" class="form-control" value="" />
+                        <span asp-validation-for="Money" class="text-info" style="font-size:15px;"></span>
+                        <button type="button" class="btn btn-outline-light btn-sm col-md-5 mx-1" id="depositCancelBtn">Cancel</button>
+                        <button type="submit" class="btn btn-outline-dark btn-sm col-md-5">Deposit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6" id="withdrawBtn">
+            <div class="bg-danger p-5 m-4 rounded text-white font-weight-bolder" align="center" style="font-size: 5vh;">
+                <span id="withdrawText">WITHDRAW</span>
+                <div id="withdrawPart" style="display:none">
+                    <form asp-action="Withdraw" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input asp-for="Money" value="" type="number" placeholder="How much will you withdraw?" class="form-control" />
+                        <span asp-validation-for="Money" class="text-info" style="font-size:15px;"></span>
+                        <button class="btn btn-outline-light btn-sm col-md-5 mx-1" id="withdrawCancelBtn">Cancel</button>
+                        <button class="btn btn-outline-dark btn-sm col-md-5">Withdraw</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/HomeToggle.js"></script>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
